@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const request = require('request-promise').defaults({jar:true});
-var cowinDataService = require('../public/javascripts/Services/cowinDataService');
+var cowinDataService = require('../public/javascripts/Services/CowinDataService');
 
 /*  Fetches all states*/
 router.get('/getStates', function(req, res, next) {
