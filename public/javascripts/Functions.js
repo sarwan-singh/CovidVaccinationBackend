@@ -14,7 +14,7 @@ const updateAndCreate = {
 
 var localHostUrl = "http://localhost:8000/";
 
-var hostedUrl = "https://covidvaccinationalerts.herokuapp.com/";
+var hostedUrl = "";
 
 const request = require('request-promise').defaults({jar:true});
 
@@ -51,7 +51,7 @@ async function getCurrentIndianDate(){
 module.exports = {
 
     getUrl : function(){
-        return hostedUrl;
+        return localHostUrl;
     },
 
     getMongoUrl : function(){
