@@ -11,6 +11,7 @@ const job = schedule.scheduleJob('*/30 * * * *',async function(){
     })
   });
 
+  
 /* GET home page. */
 router.get('/', async function(req, res, next) {
     res.send("API RUNNING!!!");
