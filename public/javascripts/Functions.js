@@ -14,7 +14,7 @@ const updateAndCreate = {
 
 var localHostUrl = "http://localhost:8000/";
 
-var hostedUrl = "http://covidvaccinationalerts-env.eba-hgbvgfjc.ap-south-1.elasticbeanstalk.com/";
+var hostedUrl = "https://covidvaccinationalerts-env-1.eba-hgbvgfjc.ap-south-1.elasticbeanstalk.com/";
 
 const request = require('request-promise').defaults({jar:true});
 
