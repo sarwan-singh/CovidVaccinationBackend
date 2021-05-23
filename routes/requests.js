@@ -21,10 +21,12 @@ router.post('/request', function(req, res, next) {
 });
 
 router.delete('/request', function(req, res, next){
+    console.log(req.body)
     var email  = req.body.email;
     var age = req.body.age;
     var district = req.body.district;
     var districtName = req.body.districtName;
+    
     RequestService.sendMailForDeletion(email, age, district, districtName, res);
 });
 
@@ -41,6 +43,7 @@ router.get('/deleteRequest', function(req, res, next) {
     var email = SecurityService.decrypt(req.query.email);
     var age = SecurityService.decrypt(req.query.age);
     var district = SecurityService.decrypt(req.query.district);
+    
     RequestService.deleteRequest(email, age, district, res);
 });
 

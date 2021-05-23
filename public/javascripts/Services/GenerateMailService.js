@@ -1,15 +1,15 @@
+const { UnavailableForLegalReasons } = require('http-errors');
 var Functions = require('../Functions');
 var SecurityService = require('../Services/SecurityService');
 
-
 module.exports={
     generateEmailStart : function(email, age, district, districtName){
-        var result = "<p><h3>Hello "+ email + "</h3></p><p>We have received a request for vaccination centers availability alerts on your mail with district of <b>" + districtName + "</b> with minimum age limit of <b>" + age + "</b>.</p>" + "<p>Kindly click <b><a href='" + Functions.getUrl() + "confirmRequest?email="+SecurityService.encrypt(email)+"&age="+SecurityService.encrypt(age)+"&district="+SecurityService.encrypt(""+district)+"'>here</a></b> to confirm the request.<p><p>If its not you, ignore the mail</p>";
+        var result = "<p><h3>Hello "+ email + "</h3></p><p>We have received a request for vaccination centers availability alerts on your mail with district of <b>" + districtName + "</b> with minimum age limit of <b>" + age + "</b>.</p>" + "<p>Kindly click <b><a href='" + Functions.getMidUrl() + "confirmRequest?email="+SecurityService.encrypt(email)+"&age="+SecurityService.encrypt(age)+"&district="+SecurityService.encrypt(""+district)+"'>here</a></b> to confirm the request.<p><p>If its not you, ignore the mail</p>";
         return result;
     },
 
     generateEmailEnd : function(email, age, district, districtName){
-        var result = "<p><h3>Hello "+ email + "</h3></p><p>We have received a request for termination of vaccination centers availability alerts on your mail with district of <b>" + districtName + "</b> with age limits of <b>" + age + "</b>.</p>" + "<p>Kindly click <b><a href='" + Functions.getUrl() + "deleteRequest?email="+SecurityService.encrypt(email)+"&age="+SecurityService.encrypt(age)+"&district="+SecurityService.encrypt(""+district)+"'>here</a></b> to confirm the request.<p><p>If its not you, ignore the mail</p>";
+        var result = "<p><h3>Hello "+ email + "</h3></p><p>We have received a request for termination of vaccination centers availability alerts on your mail with district of <b>" + districtName + "</b> with age limits of <b>" + age + "</b>.</p>" + "<p>Kindly click <b><a href='" + Functions.getMidUrl() + "deleteRequest?email="+SecurityService.encrypt(email)+"&age="+SecurityService.encrypt(age)+"&district="+SecurityService.encrypt(""+district)+"'>here</a></b> to confirm the request.<p><p>If its not you, ignore the mail</p>";
         return result;
     },
 

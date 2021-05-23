@@ -14,7 +14,7 @@ const updateAndCreate = {
 
 var localHostUrl = "http://localhost:8000/";
 var hostedUrl = "https://covidvaccinationalerts-env-1.eba-hgbvgfjc.ap-south-1.elasticbeanstalk.com/";
-
+var midUrl = "https://covidvaccinationalerts.herokuapp.com/";
 const request = require('request-promise').defaults({jar:true});
 
 var dateAPIURL = "http://api.timezonedb.com/v2.1/get-time-zone?key=K076A7YW6A1Z&format=json&by=zone&zone=Asia/Kolkata";
@@ -51,6 +51,10 @@ module.exports = {
 
     getUrl : function(){
         return hostedUrl;
+    },
+
+    getMidUrl : function(){
+        return midUrl;
     },
 
     getMongoUrl : function(){
