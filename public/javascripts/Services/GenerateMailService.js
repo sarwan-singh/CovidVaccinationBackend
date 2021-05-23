@@ -3,23 +3,65 @@ var Functions = require('../Functions');
 var SecurityService = require('../Services/SecurityService');
 
 module.exports={
-    generateEmailStart : function(email, age, district, districtName){
-        var result = "<p><h3>Hello "+ email + "</h3></p><p>We have received a request for vaccination centers availability alerts on your mail with district of <b>" + districtName + "</b> with minimum age limit of <b>" + age + "</b>.</p>" + "<p>Kindly click <b><a href='" + Functions.getMidUrl() + "confirmRequest?email="+SecurityService.encrypt(email)+"&age="+SecurityService.encrypt(age)+"&district="+SecurityService.encrypt(""+district)+"'>here</a></b> to confirm the request.<p><p>If its not you, ignore the mail</p>";
+    generateEmailStart : function(email, age, district, districtName, dose){
+        var showAge = 0;
+        var showDose = 0;
+        if(age=='0'){
+            showAge = "18+45";
+        }else{
+            showAge = age;
+        }
+        if(dose=='1'){
+            showDose = "1st";
+        }else if(dose=='2'){
+            showDose = "2nd";
+        }else{
+            showDose = "any";
+        }
+        var result = "<p><h3>Hello "+ email + "</h3></p><p>We have received a request for vaccination centers availability alerts on your mail with district of <b>" + districtName + "</b> with minimum age limit of <b>" + showAge + "</b> and dose-<b>"+showDose+"</b>.</p>" + "<p>Kindly click <b><a href='" + Functions.getMidUrl() + "confirmRequest?email="+SecurityService.encrypt(email)+"&age="+SecurityService.encrypt(age)+"&district="+SecurityService.encrypt(""+district)+"&dose="+SecurityService.encrypt(""+dose)+"'>here</a></b> to confirm the request.<p><p>If its not you, ignore the mail</p>";
         return result;
     },
 
-    generateEmailEnd : function(email, age, district, districtName){
-        var result = "<p><h3>Hello "+ email + "</h3></p><p>We have received a request for termination of vaccination centers availability alerts on your mail with district of <b>" + districtName + "</b> with age limits of <b>" + age + "</b>.</p>" + "<p>Kindly click <b><a href='" + Functions.getMidUrl() + "deleteRequest?email="+SecurityService.encrypt(email)+"&age="+SecurityService.encrypt(age)+"&district="+SecurityService.encrypt(""+district)+"'>here</a></b> to confirm the request.<p><p>If its not you, ignore the mail</p>";
+    generateEmailEnd : function(email, age, district, districtName, dose){
+        var showAge = 0;
+        var showDose = 0;
+        if(age=='0'){
+            showAge = "18+45";
+        }else{
+            showAge = age;
+        }
+        if(dose=='1'){
+            showDose = "1st";
+        }else if(dose=='2'){
+            showDose = "2nd";
+        }else{
+            showDose = "any";
+        }
+        var result = "<p><h3>Hello "+ email + "</h3></p><p>We have received a request for termination of vaccination centers availability alerts on your mail with district of <b>" + districtName + "</b> with age limits of <b>" + showAge + "</b> and dose-<b>"+showDose+"</b>.</p>" + "<p>Kindly click <b><a href='" + Functions.getMidUrl() + "deleteRequest?email="+SecurityService.encrypt(email)+"&age="+SecurityService.encrypt(age)+"&district="+SecurityService.encrypt(""+district)+"&dose="+SecurityService.encrypt(""+dose)+"'>here</a></b> to confirm the request.<p><p>If its not you, ignore the mail</p>";
         return result;
     },
 
-    generateEmailMid : function(email, age, district, districtName, centers){
+    generateEmailMid : function(email, age, district, districtName, dose, centers){
+        var showAge = 0;
+        var showDose = 0;
+        if(age=='0'){
+            showAge = "18+45";
+        }else{
+            showAge = age;
+        }
+        if(dose=='1'){
+            showDose = "1st";
+        }else if(dose=='2'){
+            showDose = "2nd";
+        }else{
+            showDose = "any";
+        }
         var result = '<table">'+
                 '<tr>'+
                     '<td><p><h3>Hello '+email+'</h3></p></td>'+
                 '</tr>'+
                 '<tr>'+
-                    '<td><p>Vaccines are available in your '+districtName+'. Click <a href="https://www.cowin.gov.in/home">here</a> to book you slot now. Here below are the available centers for minimum '+age+' years : </p></td>'+
+                    '<td><p>Vaccines are available in your '+districtName+'. Click <a href="https://www.cowin.gov.in/home">here</a> to book you slot now. Here below are the available centers for minimum '+showAge+' years, dose-'+showDose+' : </p></td>'+
                 '</tr>'+
             '</table>'
 
@@ -61,7 +103,7 @@ module.exports={
     result = result + '<table">'+
        '<tr><td ><p>Book your slot now, click <a href="https://www.cowin.gov.in/home">here</a></p></td></tr>'+
 
-       '<tr><td ><p>If you want to disable alerts, click <a href="'+ Functions.getUrl() + 'deleteRequest?email='+SecurityService.encrypt(email)+'&age='+SecurityService.encrypt(age)+'&district='+SecurityService.encrypt(district)+'">here</a></p></td></tr>'+
+       '<tr><td ><p>If you want to disable alerts, click <a href="'+ Functions.getUrl() + 'deleteRequest?email='+SecurityService.encrypt(email)+'&age='+SecurityService.encrypt(age)+'&district='+SecurityService.encrypt(district)+'&dose='+SecurityService.encrypt(dose)+'">here</a></p></td></tr>'+
         
         '<tr><td ><p><b>Covid vaccination help Team</b></p></td></tr>'+
     '</table>'

@@ -14,23 +14,28 @@ module.exports = {
         return res.send({requests : requests});
     },
  
-    createRequest : async function(email, age, district, districtName, res){
+    createRequest : async function(email, age, district, districtName, dose, res){
 
         var query = {
             email : email,
             age : age,
-            district : district
+            district : district,
+            dose : dose
         }
 
         var checkRequest = await RequestSchema.find(query);
+        console.log(query);
         if(checkRequest.length===0){
             var newRequest = new RequestSchema({
                 email:email,
                 age:age,
                 district:district,
                 districtName : districtName,
+                dose : dose,
                 status:false
             });
+
+            console.log(newRequest);
     
             await newRequest.save();
             
@@ -40,23 +45,25 @@ module.exports = {
             }
         }
 
-        await MailService.sendRequestStart(email, age, district, districtName);
+        await MailService.sendRequestStart(email, age, district, districtName, dose);
 
         return res.send({exists : false});
 
     },
 
-    sendMailForDeletion : async function(email, age, district, districtName, res){
-        await MailService.sendRequestEnd(email, age, district, districtName);
+    sendMailForDeletion : async function(email, age, district, districtName, dose, res){
+        await MailService.sendRequestEnd(email, age, district, districtName, dose);
         return res.send({success: true});
     },
 
-    confirmRequest : async function(email, age, district, res){
+    confirmRequest : async function(email, age, district, dose, res){
         var query = {
             email : email,
             age : age, 
-            district : district
+            district : district,
+            dose: dose
         }
+
         var prev = await RequestSchema.find(query);
         
         prev = prev[0];
@@ -68,12 +75,13 @@ module.exports = {
         return res.send({message:"Request approval successful. Now you will recieve alerts whenever there is an available vaccination center."});
     },
 
-    deleteRequest : async function(email, age, district, res){
+    deleteRequest : async function(email, age, district, dose, res){
 
         var query = {
             email : email,
             age : age,
-            district : district
+            district : district,
+            dose : dose
         }
 
         await RequestSchema.findOneAndDelete(query);

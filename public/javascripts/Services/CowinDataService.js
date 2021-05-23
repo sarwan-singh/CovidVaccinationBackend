@@ -67,7 +67,15 @@ module.exports = {
                                         available : session.available_capacity,
                                         vaccine : session.vaccine
                                     }
-                                    vaccineAvailableCenters.push(center);
+
+                                    if(dose=='1'){
+                                        center.available=session.available_capacity_dose1;
+                                    }else if(dose=='2'){
+                                        center.available = session.available_capacity_dose2;
+                                    }
+                                    if(center.available>0){
+                                        vaccineAvailableCenters.push(center);
+                                    }
                                     return;
                                 }
                             }
@@ -90,7 +98,14 @@ module.exports = {
                                         available : session.available_capacity,
                                         vaccine : session.vaccine
                                     }
-                                    vaccineAvailableCenters.push(center);
+                                    if(dose=='1'){
+                                        center.available=session.available_capacity_dose1;
+                                    }else if(dose=='2'){
+                                        center.available = session.available_capacity_dose2;
+                                    }
+                                    if(center.available>0){
+                                        vaccineAvailableCenters.push(center);
+                                    }
                                     return;
                                 }
                             }

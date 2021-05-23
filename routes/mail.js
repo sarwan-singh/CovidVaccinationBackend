@@ -8,8 +8,8 @@ router.post('/sendRequestStart', function(req, res, next){
     var email = req.body.email;
     var district = req.body.district;
     var age = req.body.age;
-
-    MailService.sendRequestStart(email, district, age);
+    var dose  = req.body.dose
+    MailService.sendRequestStart(email, district, age, dose);
 });
 
 /* Senging mail to use to confirm the end of request. */
@@ -17,8 +17,8 @@ router.post('/sendRequestEnd', function(req, res, next){
     var email = req.body.email;
     var district = req.body.district;
     var age = req.body.age;
-
-    MailService.sendRequestEnd(email, district, age);
+    var dose = req.body.dose;
+    MailService.sendRequestEnd(email, district, age, dose);
 });
 
 module.exports = router;

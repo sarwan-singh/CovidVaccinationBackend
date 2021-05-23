@@ -5,6 +5,7 @@ var RequestSchema = new mongoose.Schema({
     age : String, 
     district : String,
     districtName : String,
+    dose: String,
     status : Boolean
 }); 
   
