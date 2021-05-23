@@ -50,7 +50,14 @@ module.exports = {
                         var status = false;
                         if(user.age==0){
                             if(status){
-                                center.available += session.available_capacity; 
+                                
+                                if(user.dose=='1'){
+                                    center.available+=session.available_capacity_dose1;
+                                }else if(user.dose=='2'){
+                                    center.available+= session.available_capacity_dose2;
+                                }else{
+                                    center.available += session.available_capacity; 
+                                }
                             }else{
                                 status = true;
                                 if(session.available_capacity!=0){
@@ -68,9 +75,9 @@ module.exports = {
                                         vaccine : session.vaccine
                                     }
 
-                                    if(dose=='1'){
+                                    if(user.dose=='1'){
                                         center.available=session.available_capacity_dose1;
-                                    }else if(dose=='2'){
+                                    }else if(user.dose=='2'){
                                         center.available = session.available_capacity_dose2;
                                     }
                                     if(center.available>0){
@@ -81,7 +88,13 @@ module.exports = {
                             }
                         }else{
                             if(status){
-                                center.available += session.available_capacity; 
+                                if(user.dose=='1'){
+                                    center.available+=session.available_capacity_dose1;
+                                }else if(user.dose=='2'){
+                                    center.available+= session.available_capacity_dose2;
+                                }else{
+                                    center.available += session.available_capacity; 
+                                }
                             }else{
                                 if(session.available_capacity!=0&&session.min_age_limit==user.age){
                                     status = true;
@@ -98,9 +111,9 @@ module.exports = {
                                         available : session.available_capacity,
                                         vaccine : session.vaccine
                                     }
-                                    if(dose=='1'){
+                                    if(user.dose=='1'){
                                         center.available=session.available_capacity_dose1;
-                                    }else if(dose=='2'){
+                                    }else if(user.dose=='2'){
                                         center.available = session.available_capacity_dose2;
                                     }
                                     if(center.available>0){
@@ -113,7 +126,7 @@ module.exports = {
                     })
                 });
                 if(vaccineAvailableCenters.length!=0){
-                    MailService.sendAlert(user.email, user.age, user.district, user.districtName, vaccineAvailableCenters);
+                    MailService.sendAlert(user.email, user.age, user.district, user.districtName, user.dose, vaccineAvailableCenters);
                 }
             })
 

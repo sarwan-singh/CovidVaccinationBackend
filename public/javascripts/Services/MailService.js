@@ -58,6 +58,7 @@ module.exports = {
     },
 
     sendAlert : async function(email, age, district, districtName, dose, centers){
+      
       transporter.sendMail(generateMailOptions(email, age, district, districtName, dose, 2, centers),  function(error, info){
         if (error) {
           console.log(error);
