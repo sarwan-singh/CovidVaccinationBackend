@@ -26,7 +26,7 @@ router.delete('/request', function(req, res, next){
     var age = req.body.age;
     var district = req.body.district;
     var districtName = req.body.districtName;
-    var dose = req.body.dose
+    var dose = req.body.dose;
     RequestService.sendMailForDeletion(email, age, district, districtName, dose, res);
 });
 

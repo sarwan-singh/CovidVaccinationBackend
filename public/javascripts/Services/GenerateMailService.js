@@ -4,6 +4,7 @@ var SecurityService = require('../Services/SecurityService');
 
 module.exports={
     generateEmailStart : function(email, age, district, districtName, dose){
+
         var showAge = 0;
         var showDose = 0;
         if(age=='0'){
@@ -16,7 +17,7 @@ module.exports={
         }else if(dose=='2'){
             showDose = "2nd";
         }else{
-            showDose = "any";
+            showDose = "1st+2nd";
         }
         var result = "<p><h3>Hello "+ email + "</h3></p><p>We have received a request for vaccination centers availability alerts on your mail with district of <b>" + districtName + "</b> with minimum age limit of <b>" + showAge + "</b> and dose-<b>"+showDose+"</b>.</p>" + "<p>Kindly click <b><a href='" + Functions.getMidUrl() + "confirmRequest?email="+SecurityService.encrypt(email)+"&age="+SecurityService.encrypt(age)+"&district="+SecurityService.encrypt(""+district)+"&dose="+SecurityService.encrypt(""+dose)+"'>here</a></b> to confirm the request.<p><p>If its not you, ignore the mail</p>";
         return result;
@@ -35,7 +36,7 @@ module.exports={
         }else if(dose=='2'){
             showDose = "2nd";
         }else{
-            showDose = "any";
+            showDose = "1st+2nd";
         }
         var result = "<p><h3>Hello "+ email + "</h3></p><p>We have received a request for termination of vaccination centers availability alerts on your mail with district of <b>" + districtName + "</b> with age limits of <b>" + showAge + "</b> and dose-<b>"+showDose+"</b>.</p>" + "<p>Kindly click <b><a href='" + Functions.getMidUrl() + "deleteRequest?email="+SecurityService.encrypt(email)+"&age="+SecurityService.encrypt(age)+"&district="+SecurityService.encrypt(""+district)+"&dose="+SecurityService.encrypt(""+dose)+"'>here</a></b> to confirm the request.<p><p>If its not you, ignore the mail</p>";
         return result;
@@ -54,7 +55,7 @@ module.exports={
         }else if(dose=='2'){
             showDose = "2nd";
         }else{
-            showDose = "any";
+            showDose = "1st+2nd";
         }
         var result = '<table">'+
                 '<tr>'+

@@ -24,7 +24,6 @@ module.exports = {
         }
 
         var checkRequest = await RequestSchema.find(query);
-        console.log(query);
         if(checkRequest.length===0){
             var newRequest = new RequestSchema({
                 email:email,
@@ -35,7 +34,6 @@ module.exports = {
                 status:false
             });
 
-            console.log(newRequest);
     
             await newRequest.save();
             
