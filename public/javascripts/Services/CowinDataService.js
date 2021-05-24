@@ -33,13 +33,18 @@ module.exports = {
             status : true
         }
 
+        var date = await Functions.getCurrentIndianDate();
+
         var requests = await RequestSchema.find(query);
 
         requests.map(async (user)=>{
+            
             var options = {
                 method : "GET",
-                uri : await Functions.generateVaccinationCentersURL(user.district)
+                uri : await Functions.generateVaccinationCentersURL(user.district, date)
             }
+            setTimeout(async ()=>{
+            
 
             request(options).then(async function(response){
                 var data = JSON.parse(response);
@@ -129,7 +134,7 @@ module.exports = {
                     MailService.sendAlert(user.email, user.age, user.district, user.districtName, user.dose, vaccineAvailableCenters);
                 }
             })
-
+            },1500)
         })
     },
 

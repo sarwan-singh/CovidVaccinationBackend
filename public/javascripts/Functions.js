@@ -26,27 +26,7 @@ var districtUrl = "https://cdn-api.co-vin.in/api/v2/admin/location/districts/";
 
 var vaccinationCentersURL = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=";
 
-async function getCurrentIndianDate(){
-    var date = "";
 
-    var Options = {
-        method : "GET",
-        uri : dateAPIURL
-    }
-
-    await request(Options).then(async function(response){
-        var response = JSON.parse(response);
-        response = response.formatted.split(' ');
-        response = response[0];
-        date = response;
-    });
-
-    date = date.split('-');
-
-    date = date[2] + "-" + date[1] + "-" + date[0];
-
-    return date;
-}
 
 module.exports = {
 
@@ -78,9 +58,29 @@ module.exports = {
         return districtUrl+id;
     },
 
-    generateVaccinationCentersURL : async function(id){
-        var date = await getCurrentIndianDate();
+    generateVaccinationCentersURL : async function(id, date){
         var generatedURL = vaccinationCentersURL + id + "&date=" + date;
         return generatedURL;
+    },
+    getCurrentIndianDate : async function(){
+        var date = "";
+    
+        var Options = {
+            method : "GET",
+            uri : dateAPIURL
+        }
+    
+        await request(Options).then(async function(response){
+            var response = JSON.parse(response);
+            response = response.formatted.split(' ');
+            response = response[0];
+            date = response;
+        });
+    
+        date = date.split('-');
+    
+        date = date[2] + "-" + date[1] + "-" + date[0];
+    
+        return date;
     }
 }
