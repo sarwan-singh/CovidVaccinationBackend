@@ -104,7 +104,7 @@ module.exports={
     result = result + '<table">'+
        '<tr><td ><p>Book your slot now, click <a href="https://www.cowin.gov.in/home">here</a></p></td></tr>'+
 
-       '<tr><td ><p>If you want to disable alerts, click <a href="'+ Functions.getUrl() + 'deleteRequest?email='+SecurityService.encrypt(email)+'&age='+SecurityService.encrypt(age)+'&district='+SecurityService.encrypt(district)+'&dose='+SecurityService.encrypt(dose)+'">here</a></p></td></tr>'+
+       '<tr><td ><p>If you want to disable alerts, click <a href="'+ Functions.getMidUrl() + 'deleteRequest?email='+SecurityService.encrypt(email)+'&age='+SecurityService.encrypt(age)+'&district='+SecurityService.encrypt(district)+'&dose='+SecurityService.encrypt(dose)+'">here</a></p></td></tr>'+
         
         '<tr><td ><p><b>Covid vaccination help Team</b></p></td></tr>'+
     '</table>'
