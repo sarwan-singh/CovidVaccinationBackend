@@ -96,7 +96,8 @@ module.exports={
             '<td style="float: right;">Vaccine : '+value.vaccine+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td colspan="2" style="text-align: center;"><b>Block : '+value.block+', '+value.district+'</b></td>'+
+            '<td ><b>Date : '+value.date+'</b></td>'+
+            '<td style="float: right"><b>Block : '+value.block+', '+value.district+'</b></td>'+
         '</tr>'+
     '</table>'
     }

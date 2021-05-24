@@ -77,7 +77,8 @@ module.exports = {
                                         fee : value.fee_type,
                                         min_age_limit : session.min_age_limit,
                                         available : session.available_capacity,
-                                        vaccine : session.vaccine
+                                        vaccine : session.vaccine,
+                                        date : session.date
                                     }
 
                                     if(user.dose=='1'){
@@ -114,7 +115,8 @@ module.exports = {
                                         fee : value.fee_type,
                                         min_age_limit : session.min_age_limit,
                                         available : session.available_capacity,
-                                        vaccine : session.vaccine
+                                        vaccine : session.vaccine,
+                                        date : session.date
                                     }
                                     if(user.dose=='1'){
                                         center.available=session.available_capacity_dose1;
