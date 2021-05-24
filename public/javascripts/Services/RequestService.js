@@ -70,7 +70,7 @@ module.exports = {
 
         await RequestSchema.findOneAndUpdate(query, prev);
 
-        return res.send({message:"Request approval successful. Now you will recieve alerts whenever there is an available vaccination center."});
+        return res.send({message:"Request approval successful. Now you will receive alerts whenever there is an available vaccination center."});
     },
 
     deleteRequest : async function(email, age, district, dose, res){
@@ -84,6 +84,6 @@ module.exports = {
 
         await RequestSchema.findOneAndDelete(query);
 
-        return res.send({message:"Request termination successful. Now you will no longer receive alerts on terminated request."});
+        return res.send({message:"Request termination successful. Now you will no longer receive alerts on this request."});
     }
 }
