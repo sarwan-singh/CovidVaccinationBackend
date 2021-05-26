@@ -12,6 +12,7 @@ require('./public/javascripts/Services/ConnectDB')
 var usersRouter = require('./routes/users');
 var mailRouter = require('./routes/mail');
 var requestRouter = require('./routes/requests');
+var adminRouter = require('./routes/admin');
 var app = express();
 
 // view engine setup
@@ -30,7 +31,8 @@ app.use('/', indexRouter);
 app.use('/', cowinDataRouter);
 app.use('/', mailRouter);
 app.use('/users', usersRouter);
-app.use('/', requestRouter)
+app.use('/', requestRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -3,7 +3,6 @@ var MailService = require('../Services/MailService');
 
 module.exports = {
     getRequest : async function(email, res){
-
         var query = {
             email : email,
             status : true
@@ -12,6 +11,31 @@ module.exports = {
         var requests = await RequestSchema.find(query);
 
         return res.send({requests : requests});
+    },
+
+    getAll : async function(res, type){
+        var requestsTrue = await RequestSchema.find({status:true});
+        var requestsAll = await RequestSchema.find();
+        if(type==1){
+            return res.send({requests : requestsTrue});
+        }
+        if(type==2){
+            return res.send({requests : requestsAll});
+        }
+        if(type==3){
+            return res.send({count : requestsAll.length});
+        }
+        if(type==4){
+            return res.send({count : requestsTrue.length});
+        }
+        if(type==5){
+            return res.send({
+                countAll : requestsAll.length,
+                countTrue : requestsTrue.length,
+                allRequests : requestsAll,
+                trueRequests : requestsTrue
+            })
+        }
     },
  
     createRequest : async function(email, age, district, districtName, dose, res){
