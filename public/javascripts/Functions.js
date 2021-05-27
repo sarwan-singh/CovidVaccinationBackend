@@ -4,7 +4,7 @@ const connectionParams = {
     useNewUrlParser: true, 
     useCreateIndex: true, 
     useUnifiedTopology: true
-  }
+}
 
 const updateAndCreate = {
     upsert: true,
