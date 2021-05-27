@@ -9,5 +9,4 @@ var RequestSchema = new mongoose.Schema({
     status : Boolean
 }); 
   
-module.exports = mongoose.model( 
-    'Request', RequestSchema ,'Requests'); 
+module.exports = mongoose.model('Request', RequestSchema ,'Requests'); 
