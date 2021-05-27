@@ -63,7 +63,7 @@ module.exports = {
         if (error) {
           console.log(error);
         } else {
-          console.log('Email sent: ' + info.response);
+          console.log('Email sent: ' + info.response + '\n email : ' + email + ' district : ' + districtName);
         }
       })
     }
