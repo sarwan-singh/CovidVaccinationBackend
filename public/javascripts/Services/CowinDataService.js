@@ -136,7 +136,7 @@ module.exports = {
                     MailService.sendAlert(user.email, user.age, user.district, user.districtName, user.dose, vaccineAvailableCenters);
                 }
             })
-            },1500)
+            },2500)
         })
     },
 

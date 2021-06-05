@@ -14,6 +14,7 @@ const updateAndCreate = {
 
 var localHostUrl = "http://localhost:8000/";
 var hostedUrl = "http://ec2-13-232-244-38.ap-south-1.compute.amazonaws.com:8000/";
+
 var midLocalUrl = "http://localhost:1000/"
 var midHostedUrl = "https://covidvaccinationalerts.herokuapp.com/";
 const request = require('request-promise').defaults({jar:true});
