@@ -40,9 +40,9 @@ module.exports = {
     sendRequestStart : async function(email, age, district, districtName, dose, content = []){
       transporter.sendMail(generateMailOptions(email, age, district, districtName, dose, 1, content), function(error, info){
         if (error) {
-          // console.error(error);
+          console.error(error);
         } else {
-          // console.log('Email sent: ' + info.response);
+          console.log('Email sent: ' + info.response);
         }
       });
     },
@@ -50,9 +50,9 @@ module.exports = {
     sendRequestEnd : async function(email, age, district, districtName, dose, content = []){
       transporter.sendMail(generateMailOptions(email, age, district, districtName, dose, 3, content), function(error, info){
         if (error) {
-          // console.log(error);
+          console.log(error);
         } else {
-          // console.log('Email sent: ' + info.response);
+          console.log('Email sent: ' + info.response);
         }
       });
     },
@@ -61,9 +61,9 @@ module.exports = {
       
       transporter.sendMail(generateMailOptions(email, age, district, districtName, dose, 2, centers),  function(error, info){
         if (error) {
-          // console.log(error);
+          console.log(error);
         } else {
-          // console.log('Email sent: ' + info.response + '\n email : ' + email + ' district : ' + districtName);
+          console.log('Email sent: ' + info.response + '\n email : ' + email + ' district : ' + districtName);
         }
       })
     }
