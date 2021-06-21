@@ -48,4 +48,22 @@ router.get('/deleteRequest', function(req, res, next) {
     RequestService.deleteRequest(email, age, district, dose, res);
 });
 
+router.get('/pin', async function(req, res, next){
+    var email = req.query.email;
+    var age = req.query.age;
+    var dose = req.query.dose;
+    var pincode = req.query.pincode;
+
+    await RequestService.createRequestPin(email, age, dose, pincode, res);
+});
+
+router.get('/deletepin', async function(req, res, next){
+    var email = req.query.email;
+    var age = req.query.age;
+    var dose = req.query.dose;
+    var pincode = req.query.pincode;
+
+    await RequestService.deleteRequestPin(email, age, dose, pincode, res);
+});
+
 module.exports = router;

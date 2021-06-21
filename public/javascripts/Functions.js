@@ -27,7 +27,7 @@ var districtUrl = "https://cdn-api.co-vin.in/api/v2/admin/location/districts/";
 
 var vaccinationCentersURL = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=";
 
-
+var vaccinationCentersURLWithPincode = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode="
 
 module.exports = {
 
@@ -61,6 +61,10 @@ module.exports = {
 
     generateVaccinationCentersURL : async function(id, date){
         var generatedURL = vaccinationCentersURL + id + "&date=" + date;
+        return generatedURL;
+    },
+    generateVaccinationCentersURLFromPincode : async function(pincode, date){
+        var generatedURL = vaccinationCentersURLWithPincode + pincode + "&date=" + date;
         return generatedURL;
     },
     getCurrentIndianDate : async function(){

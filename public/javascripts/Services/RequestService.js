@@ -1,4 +1,5 @@
 var RequestSchema = require('../Schemas/RequestSchema'); 
+var PincodeSchema = require('../Schemas/PincodeSchema');
 var MailService = require('../Services/MailService');
 
 module.exports = {
@@ -9,6 +10,21 @@ module.exports = {
         }
 
         var requests = await RequestSchema.find(query);
+
+        var pincodeRequest = await PincodeSchema.find(query);
+
+        for(let i = 0;i<pincodeRequest.length;i++){
+            let pin = pincodeRequest[i];
+            let temp = {
+                email : pin.email,
+                age : pin.age, 
+                district : pin.pincode,
+                districtName : pin.pincode,
+                dose: pin.dose,
+                status : pin.status
+            }
+            requests.push(temp);
+        }
 
         return res.send({requests : requests});
     },
@@ -109,5 +125,53 @@ module.exports = {
         await RequestSchema.findOneAndDelete(query);
 
         return res.send({message:"Request termination successful. Now you will no longer receive alerts on this request."});
-    }
+    },
+
+    createRequestPin : async function(email, age, dose, pincode, res){
+        if(age===undefined){
+            age = 0;
+        }
+        if(dose===undefined){
+            dose = 0;
+        }
+        
+        var query = {
+            email : email,
+            age : age,
+            pincode : pincode,
+            dose : dose
+        }
+
+        var PincodeRequest = await PincodeSchema.find(query);
+        if(PincodeRequest.length===0){
+            var newRequest = new PincodeSchema({
+                email:email,
+                age:age,
+                pincode:pincode,
+                dose : dose,
+                status : true
+            });
+
+    
+            await newRequest.save();
+        }
+
+        return res.send(newRequest);
+    },
+
+    deleteRequestPin : async function(email, age, dose, pincode, res){
+
+        var query = {
+            email : email,
+            age : age,
+            pincode : pincode,
+            dose : dose
+        }
+
+        await PincodeSchema.findOneAndDelete(query);
+
+        return res.send({message:"Request termination successful. Now you will no longer receive alerts on this request."});
+    },
+
+
 }
