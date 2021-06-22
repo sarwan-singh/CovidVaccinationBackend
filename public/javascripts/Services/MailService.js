@@ -29,6 +29,8 @@ function generateMailOptions(email, age, district, districtName, dose, type, cen
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
+    secure: true,
+    pool: true,
     auth: {
       user: 'help.covidvaccination@gmail.com',
       pass: 'Qwerty@100'
