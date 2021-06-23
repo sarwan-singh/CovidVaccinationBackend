@@ -27,80 +27,46 @@ function generateMailOptions(from, email, age, district, districtName, dose, typ
       return mailOptions;
 }
 
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    secure: true,
-    pool: true,
-    auth: {
-      user: 'help.covidvaccination@gmail.com',
-      pass: 'Qwerty@100'
-    }
-});
+var emails = ["help.covidvaccination@gmail.com", "help.covidvaccination2@gmail.com", "help.covidvaccination3@gmail.com", "help.covidvaccination4@gmail.com"];
 
-var transporter2 = nodemailer.createTransport({
-    service: 'gmail',
-    secure: true,
-    pool: true,
-    auth: {
-      user: 'help.covidvaccination2@gmail.com',
-      pass: 'Qwerty@100'
-    }
-})
+async function sendMail(email, age, district, districtName, dose, type, content, i=0){
+    var from = "";
+    from = emails[i];
+    let transporter = await nodemailer.createTransport({
+      service: 'gmail',
+      secure: true,
+      pool: true,
+      auth: {
+        user: emails[i],
+        pass: 'Qwerty@100'
+      }
+    })
 
-var from1 = "help.covidvaccination@gmail.com";
-var from2 = "help.covidvaccination2@gmail.com"
+    let temp = await transporter.sendMail(generateMailOptions(from, email, age, district, districtName, dose, type, content), function(error, info){
+      if (error) {
+        if(i==4){
+          console.log("ALLL SERVERS FULL!!!");
+        }else{
+          sendMail(email, age, district, districtName, dose, type, content, i+1);
+        }
+      } else {
+      }
+    });
+  
+}
+
+
 module.exports = {
 
     sendRequestStart : async function(email, age, district, districtName, dose, content = []){
-      
-      transporter1.sendMail(generateMailOptions(from1, email, age, district, districtName, dose, 1, content), function(error, info){
-        if (error) {
-          console.log("ERROR : FIRST SERVER FULL");
-          transporter2.sendMail(generateMailOptions(from2, email, age, district, districtName, dose, 1, content), function(error, info){
-            if (error) {
-              console.log("ERROR : SECOND SERVER FULL");
-            } else {
-              // console.log('Email sent from server 2 : ' + info.response);
-            }
-          });
-        } else {
-          // console.log('Email sent: ' + info);
-        }
-      });
+      sendMail(email, age, district, districtName, dose, 1, content)
     },
 
     sendRequestEnd : async function(email, age, district, districtName, dose, content = []){
-      transporter.sendMail(generateMailOptions(from1, email, age, district, districtName, dose, 3, content), function(error, info){
-        if (error) {
-          console.log("ERROR : FIRST SERVER FULL");
-          transporter2.sendMail(generateMailOptions(from2, email, age, district, districtName, dose, 3, content), function(error, info){
-            if (error) {
-              console.log("ERROR : SECOND SERVER FULL");
-            } else {
-              // console.log('Email sent: ' + info.response);
-            }
-          });
-        } else {
-          // console.log('Email sent: ' + info.response);
-        }
-      });
+      sendMail(email, age, district, districtName, dose, 3, content)
     },
 
     sendAlert : async function(email, age, district, districtName, dose, centers){
-      
-      transporter.sendMail(generateMailOptions(from1, email, age, district, districtName, dose, 2, centers),  function(error, info){
-        if (error) {
-          console.log("ERROR : FIRST SERVER FULL");
-          transporter2.sendMail(generateMailOptions(from2, email, age, district, districtName, dose, 2, centers),  function(error, info){
-            if (error) {
-              console.log("ERROR : SECOND SERVER FULL");
-            } else {
-              // console.log('Email sent: ' + info.response + '\n email : ' + email + ' district : ' + districtName);
-            }
-          })
-        } else {
-          // console.log('Email sent: ' + info.response + '\n email : ' + email + ' district : ' + districtName);
-        }
-      })
+      sendMail(email, age, district, districtName, dose, 2, centers)
     }
 }

@@ -20,9 +20,6 @@ async function sendMails(options, user, type){
         await request(options).then(async function(response){
             var data = JSON.parse(response);
             var vaccineAvailableCenters = [];
-            if(type==2){
-                console.log(data.centers);
-            }
             data.centers.map((value)=>{
                 value.sessions.map((session)=>{
                     var center;
